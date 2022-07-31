@@ -1,0 +1,44 @@
+<form style="display: flex; justify-content: center; align-items: center; flex-direction: column;" (ngSubmit)="search()"
+    [formGroup]="flightSearchForm">
+    <div style="display: flex; justify-content: flex-start;">
+        <label for="from">From</label>&nbsp;
+        <select name="from" id="from" placeholder="from" formControlName="from">
+            <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+        </select>
+    </div>
+    <br>
+
+    <div style="display: flex; justify-content: flex-start;">
+        <label for="to">To</label>&nbsp;
+        <select name="to" id="to" placeholder="to" formControlName="to">
+            <option *ngFor="let city of getToCities()" [value]="city">{{city}}</option>
+        </select>
+    </div>
+    <br>
+
+    <input type="date" placeholder="Departure Date" formControlName="departureDate">
+    <br>
+
+    <input type="date" placeholder="Return Date" formControlName="returnDate">
+    <br>
+
+    <input type="text" placeholder="passengerCount" formControlName="passengerCount">
+    <br>
+
+    <div style="display: flex; justify-content: space-evenly;">
+        <button type="submit" [disabled]="!isFormValid">Submit</button>&nbsp;&nbsp;
+        <button type="reset" (click)="reset()">Reset</button>
+    </div>
+</form>
+
+<div *ngIf="isInvalidForm().length > 0">
+    Form Errors -
+    <div *ngFor="let error of isInvalidForm()">
+        <li style="padding-left: 45px;">{{error}}</li>
+    </div>
+</div>
+
+<div style="color:red; margin-top: 5px;" *ngIf="flightSearchForm.get('departureDate').value >= flightSearchForm.get('returnDate').value && 
+    flightSearchForm.get('returnDate').value != null">
+    Return Date should be greater than Departure Date !
+</div>

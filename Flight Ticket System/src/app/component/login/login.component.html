@@ -1,0 +1,17 @@
+<div style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-top: 15%;">
+    <div>
+        Login Form
+    </div>
+    <br>
+    <form style="display: flex; justify-content: center; align-items: center; flex-direction: column;"
+        (ngSubmit)="onLogin()" [formGroup]="loginForm">
+        <input type="text" placeholder="ID" formControlName="id">
+        <br>
+        <input type="password" placeholder="Password" formControlName="password">
+        <br>
+        <div style="display: flex; justify-content: space-evenly;">
+            <button type="submit">submit</button>&nbsp;&nbsp;
+            <button type="button" (click)="signIn()">signIn</button>
+        </div>
+    </form>
+</div>

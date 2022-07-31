@@ -1,0 +1,37 @@
+<form style="display: flex; justify-content: center; align-items: center; flex-direction: column;" (ngSubmit)="signIn()"
+    [formGroup]="registerForm">
+
+    <input type="text" placeholder="Name" formControlName="name">
+    <br>
+    <input type="text" placeholder="Email" formControlName="email">
+    <br>
+    <input type="text" placeholder="Phone No" formControlName="phoneNumber">
+    <br>
+    <select name="User Type" id="User Type" placeholder="User Type" formControlName="userType">
+        <option value="employee">Employee</option>
+        <option value="non-employee">Non-Employee</option>
+    </select>
+    <br>
+    <input type="password" placeholder="Password" formControlName="password">
+    <br>
+    <input type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+    <br>
+
+    <div style="display: flex; justify-content: space-evenly;">
+        <button type="submit" [disabled]="!isFormValid">Submit</button>&nbsp;&nbsp;
+        <button type="reset" (click)="reset()">Reset</button>
+    </div>
+</form>
+
+<div *ngIf="isInvalidForm().length > 0">
+    Form Errors -
+    <div *ngFor="let error of isInvalidForm()">
+        <li style="padding-left: 45px;">{{error}}</li>
+    </div>
+</div>
+
+<div style="color:red; margin-top: 5px;"
+    *ngIf="registerForm.get('password').value != registerForm.get('confirmPassword').value && 
+    registerForm.get('confirmPassword').value != null">
+    Password does not match
+</div>
